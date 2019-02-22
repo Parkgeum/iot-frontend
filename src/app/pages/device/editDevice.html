@@ -1,0 +1,42 @@
+<div class="modal-content" style="margin-top:130px;">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" style="text-align:center;">Edit Device</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="DeviceForm" novalidate>
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label" style="color: #000"><span style="color: red;">*</span>DeviceType</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="type" ng-init="item.type" ng-model="item.type" ng-options="item for item in type_list" required disabled style="background:#E7E7E7"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mac" class="col-sm-2 control-label" style="color: #000"><span style="color: red;">*</span>Mac</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mac" ng-model="item.mac" disabled style="background:#E7E7E7">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label" style="color: #000"><span style="color: red;">*</span>Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" ng-model="item.name" required>
+                    <span ng-if="DeviceForm.name.$dirty && DeviceForm.name.$invalid">
+                        <span ng-if="DeviceForm.name.$error.required" class="error">Name can't be blank</span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="decription" class="col-sm-2 control-label" style="color: #000">Description</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="decription" ng-model="item.description"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-auth" ng-click="ok()" ng-disabled="DeviceForm.$invalid">&nbsp;Save&nbsp;</button>
+    </div>
+</div>

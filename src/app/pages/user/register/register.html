@@ -1,0 +1,67 @@
+<main class="auth-main">
+    <div class="auth-block">
+        <h1>Sign up to BeaconYun</h1>
+        <a href="javascript:;" ui-sref="user.login" class="auth-link">Already have a BeaconYun account? Sign in!</a>
+
+        <form class="form-horizontal" name="registerForm" novalidate>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" ng-model="registerData.name" required>
+                    <span ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
+                        <span ng-show="registerForm.name.$error.required" class="error" >
+                            Name can't be blank
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" ng-model="registerData.email" required>
+                    <span ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
+                        <span ng-show="registerForm.email.$error.required" class="error" >
+                            Email can't be blank
+                        </span>
+                        <span ng-show="!registerForm.email.$error.required && registerForm.email.$error.email" class="error" >
+                            Email is invalid
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Mphone" class="col-sm-3 control-label">Mobile Phone</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="Mphone" id="Mphone" ng-model="Mphone" required ng-intl-tel-input>
+                    <span ng-show="registerForm.Mphone.$dirty && registerForm.Mphone.$invalid">
+                        <span ng-show="registerForm.Mphone.$error.required" class="error" >
+                            Mobile Phone can't be blank
+                        </span>
+                        <span ng-show="registerForm.Mphone.$invalid && !registerForm.Mphone.$error.required" class="error" >
+                            Please enter a correct phone number!
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" name="password" id="Password" placeholder="Password" ng-minlength="5" ng-model="registerData.password" required>
+                    <span ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                        <span ng-show="registerForm.password.$error.required" class="error" >
+                            Password can't be blank
+                        </span>
+                        <span ng-show="registerForm.password.$error.minlength" class="error" >
+                            Minimum is 5 characters
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-auth signUp" ng-click="register()" ng-disabled="registerForm.$invalid">Sign up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

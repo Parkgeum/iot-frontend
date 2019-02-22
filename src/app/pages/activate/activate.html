@@ -1,0 +1,20 @@
+<!-- <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+    <div class="al-main">
+        
+        <back-top></back-top>
+    </div>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div> -->
+<div class="page-not-found-modal" style="margin-top:300px;">
+    <h1 ng-if="isValid">Verification Success!</h1>
+    <h1 ng-if="isValid == false">Verification Failure!</h1>
+    
+
+    <p>
+        <a href="/">The Link Is Going To Home Page.</a>
+        <!-- <span style="font-size:28px;">{{second}} s</span> -->
+    </p>
+</div>

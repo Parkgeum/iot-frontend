@@ -1,0 +1,103 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+                <div class="widgets">
+
+                    <div class="panel traffic-panel">
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <form class="form-horizontal" name="profileForm" novalidate>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-4 control-label">Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="name" id="name" ng-model="profile.name" required>
+                                            <span ng-show="profileForm.name.$dirty && profileForm.name.$invalid">
+                                                <span ng-show="profileForm.name.$error.required" class="error" >
+                                                    Name can't be blank
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-4 control-label">Email</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="email" ng-model="profile.email" disabled style="background:rgba(231,231,231,0.2)">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Mphone" class="col-sm-4 control-label">Mobile Phone</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="Mphone" id="Mphone" ng-model="Mphone" required ng-intl-tel-input>
+                                            <span ng-show="profileForm.Mphone.$dirty && profileForm.Mphone.$invalid">
+                                                <span ng-show="profileForm.Mphone.$error.required" class="error" >
+                                                    Mobile Phone can't be blank
+                                                </span>
+                                                <span ng-show="profileForm.Mphone.$invalid && !profileForm.Mphone.$error.required" class="error" >
+                                                    Please enter a correct phone number!
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-4 control-label">New Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" name="password" id="password" ng-minlength="5" ng-model="profile.password" required>
+                                            <span ng-show="profileForm.password.$dirty && profileForm.password.$invalid">
+                                                <span ng-show="profileForm.password.$error.required" class="error" >
+                                                    Password can't be blank
+                                                </span>
+                                                <span ng-show="profileForm.password.$error.minlength" class="error" >
+                                                    Minimum is 5 characters
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_password" class="col-sm-4 control-label">Confirm Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" name="confirm_password" id="confirm_password" ng-minlength="5" ng-model="profile.confirm_password" required>
+                                            <span ng-show="profileForm.confirm_password.$dirty && profileForm.confirm_password.$invalid">
+                                                <span ng-show="profileForm.confirm_password.$error.required" class="error" >
+                                                    Password can't be blank
+                                                </span>
+                                                <span ng-show="profileForm.confirm_password.$error.minlength" class="error" >
+                                                    Minimum is 5 characters
+                                                </span>
+                                            </span>
+                                            <span ng-show="!isSame" class="error" >
+                                                The two passwords differ
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-auth" style="float:right;" ng-click="updateProfile()" ng-disabled="profileForm.$invalid">&nbsp;Save&nbsp;</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>

@@ -1,0 +1,57 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main" ng-if="vm.isAdmin">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+                <div class="widgets">
+                    <div class="row">
+                        <div class="panel traffic-panel">
+                            <div class="panel-body">
+                                <div class="row wsl-row-padding-15">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="modal-buttons clearfix" style="float: left;">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="openCreateModel('md')">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="wsl-overflow" style="margin-top: 15px;overflow: auto;">
+                                    <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped">
+                                        <tr ng-repeat="row in $data track by row.uuid">
+                                            <td data-title="'Name'">{{row.name}}</td>
+                                            <td data-title="'Email'">{{row.email}}</td>
+                                            <td data-title="'Dial Code'">{{row.nationcode}}</td>
+                                            <td data-title="'Mobile Phone'">{{row.mobile_phone}}</td>
+                                            <td data-title="'Active'">{{row.active ? '1' : '0'}}</td>
+                                            <td data-title="'Description'">{{row.description}}</td>
+                                            <td data-title="'Created time'">{{row.createdAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                            <td data-title="'Last updated time'">{{row.updatedAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                            <td data-title="'Operation'">
+                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="userGatewaysCtrl(row, 'md')">Gateways</button>
+                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="openEditModel(row, 'md')">Edit</button>
+                                                <button class="btn btn-danger editable-table-button btn-xs" ng-click="openDeleteModel(row, 'md')">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>

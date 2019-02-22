@@ -1,0 +1,65 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+                <div class="widgets">
+                    <div class="row">
+                        <div class="panel traffic-panel">
+                            <div class="panel-body device-body">
+                                <div class="row wsl-row-padding-15">
+                                    <div class="row">
+                                        <div class="col-md-6 col-create">
+                                            <div class="modal-buttons clearfix" style="float: left;">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="openCreateModel('md')">Create</button>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-md-6">
+                                            <div class="input-group input-group-search ng-scope">
+                                                <input type="text" class="form-control with-warning-addon" placeholder="Input Name or Mac" aria-describedby="basic-addon">
+                                                <span class="input-group-addon addon-right" id="basic-addon"><a href="javascript:;"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+
+                                <div class="wsl-overflow" style="margin-top: 15px;overflow: auto;">
+                                    <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped table-th-text">
+                                        <tr ng-repeat="row in $data">
+                                            <td data-title="'Device Type'" style="text-align: left;">
+                                                {{ row.type=="S1"?"Sensor":row.type }}
+                                            </td>
+                                            <td data-title="'Name'" style="text-align: left;">
+                                                {{ row.name }}
+                                            </td>
+                                            <td data-title="'Mac'">
+                                                <span ng-if="row.mac!=null">{{row.mac}}</span>
+                                                <span ng-if="row.mac==null">无</span>
+                                            </td>
+                                            <!--<td data-title="'Status'">{{row.status}}</td>-->
+                                            <td data-title="'Last updated time'">{{row.updatedAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                            <td data-title="'Operation'">
+                                                <button class="btn btn-primary editable-table-button btn-xs" ng-click="openEditModel(row,'md')">Edit</button>
+                                                <button class="btn btn-danger editable-table-button btn-xs" ng-click="openDeleteModel(row,'md')">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>

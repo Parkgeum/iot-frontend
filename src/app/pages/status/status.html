@@ -1,0 +1,126 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+
+                <div class="widgets">
+                    <div class="panel panel-default panel-status">
+                        <div class="panel-body">
+                            <div class="select-group">
+                                <span>Device Tpye :&nbsp;</span>
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button type="button" class="btn btn-default dropdown-wsl-css">{{vm.deviceTypeName}}</button>
+                                    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                    <ul uib-dropdown-menu>
+                                        <li ng-click="vm.selectDeviceType('Sensor')"><a href>Sensor</a></li>
+                                        <li ng-click="vm.selectDeviceType('iBeacon')"><a href>iBeacon</a></li>
+                                        <li ng-click="vm.selectDeviceType('Other')"><a href>Other</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="select-group">
+                                <span class="alldevice-span">Gateway Name :&nbsp;</span>
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button type="button" class="btn btn-default dropdown-wsl-css">{{vm.gateway_value}}</button>
+                                    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                    <ul uib-dropdown-menu style="max-height:400px;overflow:auto;">
+                                        <li ng-click="vm.select_gateway('All')"><a href>All</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li ng-repeat="item in vm.gateway_list" ng-click="vm.select_gateway(item.mac)"><a href>{{item.name}}--{{item.mac | uppercase}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="select-group">
+                                <span class="alldevice-span">Device Name :&nbsp;</span>
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button type="button" class="btn btn-default dropdown-wsl-css">{{vm.device_value}}</button>
+                                    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                    <ul uib-dropdown-menu style="max-height:400px;overflow:auto;">
+                                        <li ng-click="vm.select_device('All')"><a href>All</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li ng-if="vm.gateway_value == 'Select Gateway'" ng-repeat="item in vm.device_list | unique: 'mac'" ng-click="vm.select_device(item.mac)"><a href>{{item.name}}--{{item.mac | uppercase}}</a></li>
+                                        <li ng-if="vm.gateway_value != 'Select Gateway'" ng-repeat="item in vm.device_list | unique: 'mac'" ng-click="vm.select_device(item.mac)"><a href>{{item.device != null ? item.device.name : 'Unknown'}}--{{item.mac | uppercase}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="wsl-overflow wsl-alldevice" style="margin-top: 15px;overflow: auto;">
+                                <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped table-th-text">
+                                    <tr ng-repeat="row in $data">
+                                        <td data-title="'Device Name'" class="wsl-md-1 col-time" style="word-break:break-all;">
+                                            {{ row.device != null ? row.device.name : 'Unknown' }}
+                                        </td>
+                                        <td data-title="'Gateway Mac'">
+                                            {{ row.gatewayMac }}
+                                        </td>
+                                        <td data-title="'Device Mac'">
+                                            <span ng-if="row.mac!=null">{{row.mac}}</span>
+                                            <span ng-if="row.mac==null">无</span>
+                                        </td>
+                                        <td data-title="'UUID'" ng-if="vm.deviceTypeName == 'iBeacon'" class="col-md-2 alldevice-td col-time">{{row.ibeaconUuid}}</td>
+                                        <td data-title="'Major'" ng-if="vm.deviceTypeName == 'iBeacon'">
+                                            <span ng-if="row.ibeaconMajor !== null">{{row.ibeaconMajor}}</span>
+                                            <span ng-if="row.ibeaconMajor === null">无</span>
+                                        </td>
+                                        <td data-title="'Minor'" ng-if="vm.deviceTypeName == 'iBeacon'">
+                                            <span ng-if="row.ibeaconMinor!=null">{{row.ibeaconMinor}}</span>
+                                            <span ng-if="row.ibeaconMinor==null">无</span>
+                                        </td>
+                                        <td data-title="'TxPower'" ng-if="vm.deviceTypeName == 'iBeacon'">
+                                            <span ng-if="row.ibeaconTxPower!=null">{{row.ibeaconTxPower}}</span>
+                                            <span ng-if="row.ibeaconTxPower==null">无</span>
+                                        </td>
+                                        <td data-title="'Temperature(℃)'" ng-if="vm.deviceTypeName == 'Sensor'">
+                                            <span ng-if="row.temperature === null">无</span>
+                                            <span ng-if="row.temperature !== null">{{row.temperature.toFixed(2)}}</span>
+                                        </td>
+                                        <td data-title="'Humidity(%)'" ng-if="vm.deviceTypeName == 'Sensor'">
+                                            <span ng-if="row.humidity === null">无</span>
+                                            <span ng-if="row.humidity !== null">{{row.humidity.toFixed(2)}}</span>
+                                        </td>
+                                        <td data-title="'RawData'" ng-if="vm.deviceTypeName == 'Other'">
+                                            <span ng-if="row.rawData === null">无</span>
+                                            <span ng-if="row.rawData !== null">{{row.rawData}}</span>
+                                        </td>
+                                        <td data-title="'Rssi'">
+                                            <span ng-if="row.rssi === null">无</span>
+                                            <span ng-if="row.rssi !== null">{{row.rssi}}</span>
+                                        </td>
+                                        <td data-title="'Battery(%)'" ng-if="vm.deviceTypeName != 'Other'">
+                                            <span ng-if="row.battery === null">无</span>
+                                            <span ng-if="row.battery !== null">{{row.battery}}</span>
+                                        </td>
+                                        <td data-title="'Last updated time'" sortable="'updatedAt'">{{row.updatedAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>

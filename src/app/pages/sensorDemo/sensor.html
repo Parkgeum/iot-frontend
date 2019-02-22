@@ -1,0 +1,107 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main" ng-controller="sensorsCtrl as vm">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+                <div class="widgets">                   
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading">
+                                    On-line Gateways
+                                </div>
+                                <div class="panel-body">
+                                    <div class="sensor-demo-body">
+                                        <table ng-table="vm.tableParamsGateway" class="table table-striped">
+                                            <tr ng-repeat="row in $data">
+                                                <td data-title="'Name'" style="word-break:break-all;" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectGateway(row, $data)">{{row.name}}</td>
+                                                <td data-title="'Mac'" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectGateway(row, $data)">{{row.mac}}</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading">
+                                        On-line Sensors
+                                </div>
+                                <div class="panel-body">
+                                    <div class="sensor-demo-body">
+                                        <table ng-table="vm.tableParamsSensor" class="table table-striped">
+                                            <tr ng-repeat="row in $data">
+                                                <td data-title="'Name'" style="word-break:break-all;" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectSensor(row, $data)">{{row.device != null ?row.device.name:"Unknown"}}</td>
+                                                <td data-title="'Mac'" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectSensor(row, $data)">{{row.mac}}</td>
+                                                <!--<td data-title="'Temperature'" class="{{row.selected?'wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectSensor(row, $data)">{{row.temperature.toFixed(2)}}</td>
+                                                <td data-title="'Humidity'" class="{{row.selected?'wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectSensor(row, $data)">{{row.humidity.toFixed(2)}}</td>-->
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 wsl-1024">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading">
+                                    <span>Last Updated Time :&nbsp;</span>
+                                    <span>{{vm.sensor_th.updatedAt | date:"yyyy-MM-dd HH:mm:ss"}}</span>
+                                </div>
+                                <div class="panel-body">
+                                    <div class=" col-md-6 col-sm-6">
+                                        <div id="GAUGE_1"></div>
+                                    </div>
+                                    <div class=" col-md-6 col-sm-6">
+                                        <div id="GAUGE_2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6 wsl-1024">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <div class="form-group clearfix">
+                                        <div class="wsl-select-float wsl-select-form-size wsl-input">
+                                            <input type="text" id="time_input" class="form-control wsl-form-select wsl-input" name="datefilter" value="yyyy-mm-dd to yyyy-mm-dd" />
+                                        </div>
+                                        <div class="wsl-select-float wsl-select-lable2-size" id="selectTime">
+                                            <label><a href="javascript:;" class="wsl-label-default-color wsl-label-active-color" ng-click="vm.selectTime($event, 1)">1hour&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 2)">Today&nbsp;</a></label>
+                                            <!-- <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 3)">Yesterday&nbsp;</a></label> -->
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 4)">7days&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 5)">14days&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 6)">30days&nbsp;</a></label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="panel-body">
+                                    <div id="LINE_1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>
+
+
+

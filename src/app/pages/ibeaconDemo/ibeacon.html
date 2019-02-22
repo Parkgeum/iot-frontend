@@ -1,0 +1,85 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main" ng-controller="ibeaconCtrl as vm">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+                <div class="widgets">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading">
+                                    On-line Gateways
+                                </div>
+                                <div class="panel-body">
+                                    <div class="sensor-demo-body">
+                                        <table ng-table="vm.tableParamsGateway" class="table table-striped">
+                                            <tr ng-repeat="row in $data">
+                                                <td data-title="'Name'" style="word-break:break-all;" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}"
+                                                    ng-click="vm.selectGateway(row, $data)">{{row.name}}</td>
+                                                <td data-title="'Mac'" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectGateway(row, $data)">{{row.mac}}</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading">
+                                    On-line iBeacons
+                                </div>
+                                <div class="panel-body">
+                                    <div class="sensor-demo-body">
+                                        <table ng-table="vm.tableParamsSensor" class="table table-striped">
+                                            <tr ng-repeat="row in $data">
+                                                <td data-title="'Name'" style="word-break:break-all;" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}"
+                                                    ng-click="vm.selectiBeacon(row, $data)">{{row.device != null ?row.device.name:"Unknown"}}</td>
+                                                <td data-title="'Mac'" class="{{row.selected?'col-sm-6 col-xs-6 wsl-gateway-active':'wsl-gateway-inactive'}}" ng-click="vm.selectiBeacon(row, $data)">{{row.mac}}</td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12 wsl-1024">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <div class="form-group clearfix">
+                                        <div class="wsl-select-float wsl-select-lable2-size" id="selectTime">
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 1)">10second&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color wsl-label-active-color" ng-click="vm.selectTime($event, 2)">2minute&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 3)">1hour&nbsp;</a></label>
+                                            <label><a href="javascript:;" class="wsl-label-default-color" ng-click="vm.selectTime($event, 4)">Today&nbsp;</a></label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="panel-body">
+                                    <div id="LINE_2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>

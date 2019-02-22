@@ -1,0 +1,234 @@
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div autoscroll="true" autoscroll-body-top>
+
+                <div class="widgets">
+                    <div ba-panel class="ba-panel">
+                        <div><img src="assets/img/app/pages/map.jpg" style="width: 100%;"></div>
+                        <div class="wsl-tag-1">
+                            <span style="color: #000000;">{{vm.gateway1_value.name}}</span>&nbsp;&nbsp;
+                            <span ng-show="vm.devicelist1.countNew" style="color: #1f9c8f;font-size: 22px;">+ {{ vm.devicelist1.countNew }}</span>
+                            <span ng-show="vm.devicelist1.countDelete" style="color: red;font-size: 22px;">- {{ vm.devicelist1.countDelete }}</span>
+                        </div>
+                        <div class="wsl-tag-2">
+                            <span style="color: #000000;">{{vm.gateway2_value.name}}</span>&nbsp;&nbsp;
+                            <span ng-show="vm.devicelist2.countNew" style="color: #1f9c8f;font-size: 22px;">+ {{ vm.devicelist2.countNew }}</span>
+                            <span ng-show="vm.devicelist2.countDelete" style="color: red;font-size: 22px;">- {{ vm.devicelist2.countDelete }}</span>
+                        </div>
+                        <div class="wsl-tag-3">
+                            <span style="color: #000000;">{{vm.gateway3_value.name}}</span>&nbsp;&nbsp;
+                            <span ng-show="vm.devicelist3.countNew" style="color: #1f9c8f;font-size: 22px;">+ {{ vm.devicelist3.countNew }}</span>
+                            <span ng-show="vm.devicelist3.countDelete" style="color: red;font-size: 22px;">- {{ vm.devicelist3.countDelete }}</span>
+                        </div>
+                        <div class="wsl-tag-4">
+                            <span style="color: #000000;">{{vm.gateway4_value.name}}</span>&nbsp;&nbsp;
+                            <span ng-show="vm.devicelist4.countNew" class="animated bounceInRight" style="color: #1f9c8f;font-size: 22px;">+ {{ vm.devicelist4.countNew }}</span>
+                            <span ng-show="vm.devicelist4.countDelete" class="animated bounceInRight" style="color: red;font-size: 22px;">- {{ vm.devicelist4.countDelete }}</span>
+                        </div>
+                    </div>
+                    <div class="row panel-assets">
+                        <!--<table ng-table="vm.tableParams1">
+                            <tr ng-repeat="row in $data">
+                            </tr>
+                        </table>-->
+                        <div class="col-md-3 wsl-col-md-3">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <!--<div class="wsl-select-float wsl-select-lable-size wsl-media-query">
+                                        <label style="font-weight:400;">Gateway 1 :</label>
+                                    </div>-->
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default min-btn">{{vm.gateway1_value.name || 'Select Gateway'}}</button>
+                                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul uib-dropdown-menu class="wsl-uib-dropdown-lanel-width">
+                                            <li ng-repeat="row in vm.gatewaylist1" ng-click="vm.selectGateway1(row)"><a href>{{row.name}}</a></li>
+                                            <!--<li role="separator" class="divider"></li>-->
+                                        </ul>
+                                    </div>
+                                    <span id="gateway1_new" ng-if="vm.devicelist1.countNew" style="color: green;">+{{ vm.devicelist1.countNew }}</span>
+                                    <span id="gateway1_delete" ng-if="vm.devicelist1.countDelete" style="color: red;">-{{ vm.devicelist1.countDelete }}</span>
+                                </div>
+                                <div class="wsl-panel-body panel-body">
+                                    <div class="wsl-list-group-div">
+                                        <!--<ul class="list-group">
+                                            <li class="list-group-item wsl-list-group-item" ng-repeat="item in vm.devicelist1">
+                                                <div style="word-break:break-all" class="wsl-list-group-item-mac-text"><span>{{item.device != null ? item.device.name : 'Unknown'}}&nbsp;&nbsp;{{item.mac}}</span></div>
+                                                <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">New</span>
+                                                <span class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                <span>&nbsp;</span>
+                                            </li>
+                                        </ul>-->
+                                        <table ng-table="vm.tableParams1" class="list-group" style="width:100%">
+                                            <tr ng-repeat="item in $data" class="list-group-item wsl-list-group-item">
+                                                <td class="col-md-9 col-sm-9 col-xs-9 wsl-col-10">
+                                                    <div class="wsl-list-group-item-mac-text"><span class="word-name">{{item.device != null ? item.device.name : 'Unknown'}}</span><span>&nbsp; {{item.mac}}</span></div>
+                                                </td>
+                                                <td class="col-md-2 col-sm-2 col-xs-2 wsl-col-2">
+                                                    <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">&nbsp;&nbsp;&nbsp;New&nbsp;&nbsp;&nbsp;</span>
+                                                    <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 wsl-col-md-3 wsl-div-2">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <!--<div class="wsl-select-float wsl-select-lable-size wsl-media-query">
+                                        <label style="font-weight:400;">Gateway 2 :</label>
+                                    </div>-->
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default min-btn">{{vm.gateway2_value.name || 'Select Gateway'}}</button>
+                                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul uib-dropdown-menu class="wsl-uib-dropdown-lanel-width">
+                                            <li ng-repeat="row in vm.gatewaylist2" ng-click="vm.selectGateway2(row)"><a href>{{row.name}}</a></li>
+                                        </ul>
+                                    </div>
+                                    <span id="gateway2_new" ng-if="vm.devicelist2.countNew" style="color: green;">+{{ vm.devicelist2.countNew }}</span>
+                                    <span id="gateway2_delete" ng-if="vm.devicelist2.countDelete" style="color: red;">-{{ vm.devicelist2.countDelete }}</span>
+                                </div>
+                                <div class="wsl-panel-body panel-body">
+                                    <div class="wsl-list-group-div">
+                                        <!--<ul class="list-group">
+                                            <li class="list-group-item wsl-list-group-item" ng-repeat="item in vm.devicelist2">
+                                                <div style="float: left;" class="wsl-list-group-item-mac-text"><span>{{item.device != null ? item.device.name : 'Unknown'}}</span></div>
+                                                <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">New</span>
+                                                <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                <span>&nbsp;</span>
+                                            </li>
+                                        </ul>-->
+                                        <table ng-table="vm.tableParams2" class="list-group" style="width:100%">
+                                            <tr ng-repeat="item in $data" class="list-group-item wsl-list-group-item">
+                                                <td class="col-md-9 col-sm-9 col-xs-9 wsl-col-10">
+                                                    <div class="wsl-list-group-item-mac-text"><span class="word-name">{{item.device != null ? item.device.name : 'Unknown'}}</span><span>&nbsp; {{item.mac}}</span></div>
+                                                </td>
+                                                <td class="col-md-2 col-sm-2 col-xs-2 wsl-col-2">
+                                                    <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">&nbsp;&nbsp;&nbsp;New&nbsp;&nbsp;&nbsp;</span>
+                                                    <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 wsl-col-md-3 wsl-div-4">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <!--<div class="wsl-select-float wsl-select-lable-size wsl-media-query">
+                                        <label style="font-weight:400;">Gateway 3 :</label>
+                                    </div>-->
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default min-btn">{{vm.gateway3_value.name || 'Select Gateway'}}</button>
+                                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul uib-dropdown-menu class="wsl-uib-dropdown-lanel-width">
+                                            <li ng-repeat="row in vm.gatewaylist3" ng-click="vm.selectGateway3(row)"><a href>{{row.name}}</a></li>
+                                            <!--<li role="separator" class="divider"></li>-->
+                                        </ul>
+                                    </div>
+                                    <!--<span id="gateway3_new" ng-show="vm.gateway3.sensors.length>vm.gateway3.sensorsTotal" style="color: green;" class="animated fadeInLeft wsl-new-title">+ {{ vm.gateway3.sensors.length - vm.gateway3.sensorsTotal }}</span>-->
+                                    <!--<span id="gateway3_delete" ng-show="vm.gateway3.sensors.length<vm.gateway3.sensorsTotal" style="color: red;" class="animated fadeInLeft wsl-delete-title">- {{ vm.gateway3.sensorsTotal - vm.gateway3.sensors.length }}</span>-->
+
+                                    <span id="gateway3_new" ng-if="vm.devicelist3.countNew" style="color: green;">+{{ vm.devicelist3.countNew }}</span>
+                                    <span id="gateway3_delete" ng-if="vm.devicelist3.countDelete" style="color: red;">-{{ vm.devicelist3.countDelete }}</span>
+                                </div>
+                                <div class="wsl-panel-body panel-body">
+                                    <div class="wsl-list-group-div">
+                                        <!--<ul class="list-group">
+                                            <li class="list-group-item wsl-list-group-item" ng-repeat="item in vm.devicelist3">
+                                                <div style="float: left;" class="wsl-list-group-item-mac-text"><span>{{item.device != null ? item.device.name : 'Unknown'}}</span></div>
+                                                <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">New</span>
+                                                <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                <span>&nbsp;</span>
+                                            </li>
+                                        </ul>-->
+                                        <table ng-table="vm.tableParams3" class="list-group" style="width:100%">
+                                            <tr ng-repeat="item in $data" class="list-group-item wsl-list-group-item">
+                                                <td class="col-md-9 col-sm-9 col-xs-9 wsl-col-10">
+                                                    <div class="wsl-list-group-item-mac-text"><span class="word-name">{{item.device != null ? item.device.name : 'Unknown'}}</span><span>&nbsp; {{item.mac}}</span></div>
+                                                </td>
+                                                <td class="col-md-2 col-sm-2 col-xs-2 wsl-col-2">
+                                                    <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">&nbsp;&nbsp;&nbsp;New&nbsp;&nbsp;&nbsp;</span>
+                                                    <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 wsl-col-md-3 wsl-div-4">
+                            <div class="panel traffic-panel">
+                                <div class="panel-heading wsl-panel-heading">
+                                    <!--<div class="wsl-select-float wsl-select-lable-size wsl-media-query">
+                                        <label style="font-weight:400;">Gateway 4 :</label>
+                                    </div>-->
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default min-btn">{{vm.gateway4_value.name || 'Select Gateway'}}</button>
+                                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul uib-dropdown-menu class="wsl-uib-dropdown-lanel-width">
+                                            <li ng-repeat="row in vm.gatewaylist4" ng-click="vm.selectGateway4(row)"><a href>{{row.name}}</a></li>
+                                            <!--<li role="separator" class="divider"></li>-->
+                                        </ul>
+                                    </div>
+                                    <span id="gateway4_new" ng-if="vm.devicelist4.countNew" style="color: green;">+{{ vm.devicelist4.countNew }}</span>
+                                    <span id="gateway4_delete" ng-if="vm.devicelist4.countDelete" style="color: red;">-{{ vm.devicelist4.countDelete }}</span>
+                                </div>
+                                <div class="wsl-panel-body panel-body">
+                                    <div class="wsl-list-group-div">
+                                        <!--<ul class="list-group">
+                                            <li class="list-group-item wsl-list-group-item" ng-repeat="item in vm.devicelist4">
+                                                <div style="float: left;" class="wsl-list-group-item-mac-text"><span>{{item.device != null ? item.device.name : 'Unknown'}}</span></div>
+                                                <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">New</span>
+                                                <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                <span>&nbsp;</span>
+                                            </li>
+                                        </ul>-->
+                                        <table ng-table="vm.tableParams4" class="list-group" style="width:100%">
+                                            <tr ng-repeat="item in $data" class="list-group-item wsl-list-group-item">
+                                                <td class="col-md-9 col-sm-9 col-xs-9 wsl-col-10">
+                                                    <div class="wsl-list-group-item-mac-text"><span class="word-name">{{item.device != null ? item.device.name : 'Unknown'}}</span><span>&nbsp; {{item.mac}}</span></div>
+                                                </td>
+                                                <td class="col-md-2 col-sm-2 col-xs-2 wsl-col-2">
+                                                    <span ng-if="item.isNew" class="animated fadeInLeft wsl-new">&nbsp;&nbsp;&nbsp;New&nbsp;&nbsp;&nbsp;</span>
+                                                    <span ng-if="item.delete" class="animated fadeInLeft wsl-delete">Disappear</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
+
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>
