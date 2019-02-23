@@ -4,7 +4,7 @@
     var IMAGES_ROOT = 'assets/img/';
 
     angular.module('BlurAdmin.theme')
-        .constant('API_URL', 'http://iot.beaconyun.com:8080')
+        .constant('API_URL', 'http://rizal23.com:8080')
         // .constant('API_URL', 'http://139.196.110.136:8080')
         .constant('layoutSizes', {
             resWidthCollapseSidebar: 1200,
