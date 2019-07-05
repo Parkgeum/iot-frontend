@@ -12,7 +12,7 @@
             $scope.second = 1;
 
             if(arr.length == 2){
-                var url = "http://iot.beaconyun.com:8080/account/activate?" + arr[1];
+                var url = "http://192.168.0.45:8080/account/activate?" + arr[1];
                 console.log(url);
                 $http({
                     method: 'GET',
@@ -25,7 +25,7 @@
                     if(resp.data.status === 200){
                         $scope.isValid = true;
                         $timeout(function(){
-                            window.location= 'http://iot.beaconyun.com';
+                            window.location= 'http://192.168.0.45:3000';
                         },2000)
                         
                     }else if(resp.data.status === 400){
